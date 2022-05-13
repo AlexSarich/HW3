@@ -1,15 +1,20 @@
 fun main() {
-    commCalc(amount = 1000_00)
-    commCalc("Mastercard", 100, 1000_00)
-    commCalc("Maestro", 75001_00, 1000_00)
-    commCalc(card = "Visa", amount = 1000_00)
+    val a = commCalc(amount = 1000_00)
+    val b = commCalc("Mastercard", 100, 1000_00)
+    val c = commCalc("Maestro", 75001_00, 1000_00)
+    val d = commCalc(card = "Visa", amount = 1000_00)
+
+    message(a)
+    message(b)
+    message(c)
+    message(d)
 }
 
-fun commCalc(card: String = "VK pay", prevTrans: Int = 0, amount: Int) {
-    when (card) {
-        "Mastercard", "Maestro" -> println("Комиссия ${calcForM(prevTrans, amount)} руб.")
-        "Visa", "Мир" -> println("Комиссия ${calcForVisa(amount)} руб." )
-        else -> println("Комиссия 0 руб.")
+fun commCalc(card: String = "VK pay", prevTrans: Int = 0, amount: Int): Int {
+    return when (card) {
+        "Mastercard", "Maestro" -> calcForM(prevTrans, amount)
+        "Visa", "Мир" -> calcForVisa(amount)
+        else -> 0
     }
 }
 
@@ -31,3 +36,5 @@ fun calcForVisa(amount: Int): Int {
         comm.toInt()
     }
 }
+
+fun message(result: Int) = println("Комиссия составит ${result} руб.")
